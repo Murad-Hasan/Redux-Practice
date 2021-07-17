@@ -2,6 +2,7 @@ const redux = require('redux');
 const reduxLogger = require('redux-logger')
 const createStore = redux.createStore;
 const combineReducer = redux.combineReducers;
+const applyMiddleware =  redux.applyMiddleware
 const logger = reduxLogger.createLogger()
 
 
@@ -106,7 +107,7 @@ const rootReducer = combineReducer ({   //example for combine reducers
     iceCream: iceCreamReducer
 })
 
-const store = createStore(rootReducer);    // use only reducer as a parameter when you use single reducer & rootReducer for combineReducer
+const store = createStore(rootReducer, applyMiddleware(logger));    // use only reducer as a parameter when you use single reducer & rootReducer for combineReducer
 console.log('initial state', store.getState());
 store.subscribe (() => console.log('Update state', store.getState()));
 store.dispatch(buyCake())
